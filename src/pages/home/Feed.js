@@ -1,38 +1,42 @@
-import React, { Component  } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 import api from '../../api'
 
-class Feed extends Component{
+export default function Feed() {
+  const [contatos, setPosts] = React.useState([])
 
-  state = {
-    contatos: []
-  }
+  React.useEffect(() => {
+    api
+      .get('contato')
+      .then(response => {
+        setPosts(response.data)
+      })
+      .catch(() => {
+        console.log('Deu certo')
+      })
+  }, [])
 
-  async componentDidMount() {
-    const response = await api.get('contato')
-    console.log(response.data)
-    this.setState({contatos: response.data })
-  }
-
-  render() {
-    const { contatos } = this.state;
-    return (
-      <div>
-        <h1>Contatos</h1>
-        <ul>
-          {contatos.map((contato)=> (
-            <li key={contato.id}>
-              <p>Id: {contato.id}</p>
-              <p>Nome: {contato.nome}</p>
-              <p>Email: {contato.email}</p>
-              <p>Telefone: {contato.telefone}</p>
-            </li>
-          ))}
-        </ul>
-        <Link to="/">retornar a página inicial</Link>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h2>Contatos</h2>
+      <main>
+        <div className="cards">
+          {contatos.map((contato, key) => {
+            return (
+              <div className="card" key={key}>
+                <div className="line"></div>
+                <p>Id: {contato.id}</p>
+                <p>Nome: {contato.nome}</p>
+                <p>Email: {contato.email}</p>
+                <p>Telefone: {contato.telefone}</p>
+              </div>
+            )
+          })}
+        </div>
+      </main>
+      <Link to="/">retornar a página inicial</Link>
+    </div>
+  )
 }
-export default Feed
+
