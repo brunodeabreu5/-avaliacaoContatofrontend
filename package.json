@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "axios": "^0.24.0",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "react-hook-form": "^7.19.5",
+    "yup": "^0.32.11"
   }
 }
