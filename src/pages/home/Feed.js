@@ -1,9 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+
 import api from '../../api'
 
 export default function Feed() {
+
   const [contatos, setPosts] = React.useState([])
 
   React.useEffect(() => {
@@ -30,6 +32,13 @@ export default function Feed() {
                 <p>Nome: {contato.nome}</p>
                 <p>Email: {contato.email}</p>
                 <p>Telefone: {contato.telefone}</p>
+                <div className="btns">
+                  <div className="btn-edit">
+                  <Link to={{ pathname: `/edit/${contato.id}` }} >
+                      <button>Edit</button>
+                    </Link>
+                  </div>
+                </div>
               </div>
             )
           })}
@@ -39,4 +48,3 @@ export default function Feed() {
     </div>
   )
 }
-

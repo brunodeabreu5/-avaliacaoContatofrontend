@@ -9282,6 +9282,13 @@
   "resolved" "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   "version" "6.0.9"
 
+"react-hooks-forms@^0.8.1":
+  "integrity" "sha512-lavoyfUVGf4B//+DR7QNTbrrGz+ienEQ372hrWNQTT23oXFSJrzFQSWyY91J2Ip6FFHfC3pSdColpHhRfh8HHw=="
+  "resolved" "https://registry.npmjs.org/react-hooks-forms/-/react-hooks-forms-0.8.1.tgz"
+  "version" "0.8.1"
+  dependencies:
+    "tslib" "^2.0.3"
+
 "react-is@^16.8.1":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
