@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 
 import api from '../../api'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import './Post.css'
 
 export default function Post() {
+  const history = useNavigate()
   const [data, setData] = useState({
     nome: '',
     email: '',
@@ -22,6 +23,7 @@ export default function Post() {
       })
       .then(response => {
         console.log(response.data)
+        history('/')
       })
   }
 

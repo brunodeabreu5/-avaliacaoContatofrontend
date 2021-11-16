@@ -1,11 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-
 import api from '../../api'
 
 export default function Feed() {
-
   const [contatos, setPosts] = React.useState([])
 
   React.useEffect(() => {
@@ -19,6 +17,10 @@ export default function Feed() {
       })
   }, [])
 
+  function deletePost(id) {
+    api.delete(`contato/${id}`)
+    setPosts(contatos.filter(data => data.id !== id))
+  }
   return (
     <div>
       <h2>Contatos</h2>
@@ -34,9 +36,14 @@ export default function Feed() {
                 <p>Telefone: {contato.telefone}</p>
                 <div className="btns">
                   <div className="btn-edit">
-                  <Link to={{ pathname: `/edit/${contato.id}` }} >
+                    <Link to={{ pathname: `/edit/${contato.id}` }}>
                       <button>Edit</button>
                     </Link>
+                  </div>
+                  <div className="btn-delete">
+                    <button onClick={() => deletePost(contato.id)}>
+                      delete
+                    </button>
                   </div>
                 </div>
               </div>

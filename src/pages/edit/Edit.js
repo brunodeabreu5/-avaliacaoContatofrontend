@@ -3,13 +3,14 @@ import React, { useState } from 'react'
 import api from '../../api'
 import { Link } from 'react-router-dom'
 
-import {  useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import '../post/Post.css'
 
 export default function Edit() {
-
   const { id } = useParams()
+
+  const history = useNavigate()
 
   const [data, setData] = useState({
     nome: '',
@@ -18,48 +19,46 @@ export default function Edit() {
   })
 
   function submit(e) {
-    e.preventDefault()
     api
-      .put('contato/edit/${id}', {
-        nome: data.nome,
-        email: data.email,
-        telefone: data.telefone
-      })
+      .put(`contato/${id}`, data)
       .then(response => {
+        
         console.log(response.data)
       })
+      history("/")
+  }
+
+  const getData = async () => {
+    const response = await api.get(`contato/${id}`)
+    setData(response.data)
+    console.log(response.data)
+    return response.data
   }
 
   React.useEffect(() => {
-    api
-      .get(`contato/edit/${id}`)
-      .then(response => {
-        reset(response.)
-      })
+    getData()
   }, [])
 
-  function handle(e) {
-    const newdata = { ...data }
-    newdata[e.target.id] = e.target.value
-    setData(newdata)
-
-    console.log(newdata)
+  function handle({ target: { name, value } }) {
+    setData({ ...data, [name]: value })
+    
   }
 
   return (
     <di>
       <main>
         <div className="cad-post">
-          <h1>Cadastra Contato</h1>
+          <h1>Editar Contato</h1>
           <div className="line-post"></div>
           <div className="card=body-post">
-            <form onSubmit={e => submit(e)}>
+            <form onSubmit={submit}>
               <div className="fields">
                 <label>Nome</label>
                 <input
                   type="text"
                   placeholder="name"
-                  onChange={e => handle(e)}
+                  onChange={handle}
+                  name="nome"
                   value={data.nome}
                   id="nome"
                 />
@@ -68,9 +67,10 @@ export default function Edit() {
                 <label>Email</label>
                 <input
                   type="text"
-                  onChange={e => handle(e)}
+                  onChange={handle}
                   value={data.email}
                   id="email"
+                  name="email"
                   placeholder="email"
                 />
               </div>
@@ -80,8 +80,9 @@ export default function Edit() {
                   placeholder="telefone"
                   type="text"
                   value={data.telefone}
-                  onChange={e => handle(e)}
+                  onChange={handle}
                   id="telefone"
+                  name="telefone"
                 />
               </div>
               <di className="btn-post">
