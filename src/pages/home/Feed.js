@@ -37,16 +37,16 @@ export default function Feed() {
                 <div className="btns">
                   <div className="btn-edit">
                     <Link to={{ pathname: `/edit/${contato.id}` }}>
-                      <button>Edit</button>
+                      <button>Editar</button>
                     </Link>
                   </div>
                   <div className="btn-delete">
                     <button onClick={() => deletePost(contato.id)}>
-                      delete
+                      Delete
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> 
             )
           })}
         </div>

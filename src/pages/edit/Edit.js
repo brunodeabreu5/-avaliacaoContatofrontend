@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import api from '../../api'
 import { Link } from 'react-router-dom'
@@ -18,14 +18,11 @@ export default function Edit() {
     telefone: ''
   })
 
-  function submit(e) {
-    api
-      .put(`contato/${id}`, data)
-      .then(response => {
-        
-        console.log(response.data)
-      })
-      history("/")
+  function submit() {
+    api.put(`contato/${id}`, data).then(response => {
+      console.log(response.data)
+    })
+    history('/feed')
   }
 
   const getData = async () => {
@@ -35,13 +32,12 @@ export default function Edit() {
     return response.data
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getData()
   }, [])
 
   function handle({ target: { name, value } }) {
     setData({ ...data, [name]: value })
-    
   }
 
   return (
@@ -89,7 +85,9 @@ export default function Edit() {
                 <button type="submit">Salvar</button>
               </di>
             </form>
-            <Link to="/">retornar a página inicial</Link>
+            <div className="link">
+            <Link  to="/">retornar a página inicial</Link>
+            </div>
           </div>
         </div>
       </main>

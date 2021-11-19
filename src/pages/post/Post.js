@@ -56,12 +56,14 @@ export default function Post() {
               <div className="fields">
                 <label>Email</label>
                 <input
-                  type="text"
+                  type="email"
                   onChange={e => handle(e)}
                   value={data.email}
+                  data-testid ="email"
                   id="email"
                   placeholder="email"
                 />
+                {data.email && !(/\S+@\S+\.\S+/).test(data.email) && <span  data-testid="error-msg">Entre com outro email valido</span>}
               </div>
               <div className="fields">
                 <label>Telefone</label>
@@ -77,7 +79,9 @@ export default function Post() {
                 <button type="submit">Salvar</button>
               </di>
             </form>
+            <div className="link">
             <Link to="/">retornar a página inicial</Link>
+            </div>
           </div>
         </div>
       </main>
